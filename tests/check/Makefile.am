@@ -407,7 +407,7 @@ libs_tag_CFLAGS = \
 	$(AM_CFLAGS)
 libs_tag_LDADD = \
 	$(top_builddir)/gst-libs/gst/tag/libgsttag-@GST_API_VERSION@.la \
-	$(GST_BASE_LIBS) $(LDADD)
+	$(GST_BASE_LIBS) $(GIO_LIBS) $(LDADD)
 
 libs_pbutils_CFLAGS = \
 	$(GST_PLUGINS_BASE_CFLAGS) \
@@ -500,7 +500,7 @@ elements_audioresample_LDADD = \
 	$(GST_BASE_LIBS) \
 	$(LDADD)
 
-elements_textoverlay_LDADD = $(top_builddir)/gst-libs/gst/video/libgstvideo-@GST_API_VERSION@.la $(GST_BASE_LIBS) $(LDADD)
+elements_textoverlay_LDADD = $(top_builddir)/gst-libs/gst/video/libgstvideo-@GST_API_VERSION@.la $(GST_BASE_LIBS) $(GIO_LIBS)  $(LDADD)
 elements_textoverlay_CFLAGS = $(GST_PLUGINS_BASE_CFLAGS) $(GST_BASE_CFLAGS) $(AM_CFLAGS)
 
 elements_volume_LDADD = \
