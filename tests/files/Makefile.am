@@ -1,5 +1,6 @@
 EXTRA_DIST = \
 	623663.mts \
+	exif-tag.gz \
 	hls.m3u8 \
 	license-uris \
 	partialframe.mjpeg \
