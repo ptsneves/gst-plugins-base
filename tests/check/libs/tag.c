@@ -1446,6 +1446,13 @@ GST_START_TEST (test_exif_tags_serialization_deserialization)
   g_value_set_static_string (&value, "Äë");
   do_simple_exif_tag_serialization_deserialization (GST_TAG_ARTIST, &value);
 
+  /* utf8 characters */
+  g_value_set_static_string (&value,
+      "Τη γλώσσα μου έδωσαν ελληνική");
+  do_simple_exif_tag_serialization_deserialization (GST_TAG_ARTIST, &value);
+  g_value_set_static_string (&value, "ή");
+  do_simple_exif_tag_serialization_deserialization (GST_TAG_ARTIST, &value);
+
   /* image orientation tests */
   g_value_set_static_string (&value, "rotate-0");
   do_simple_exif_tag_serialization_deserialization (GST_TAG_IMAGE_ORIENTATION,

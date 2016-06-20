@@ -809,38 +809,30 @@ static void
 write_exif_ascii_tag (GstExifWriter * writer, guint16 tag, const gchar * str)
 {
   guint32 offset = 0;
-  gchar *ascii_str;
-  gsize ascii_size;
-  GError *error = NULL;
+  const gchar *str_end = NULL;
+  gsize str_size;
 
-  ascii_str = g_convert (str, -1, "latin1", "utf8", NULL, &ascii_size, &error);
-
-  if (error) {
-    GST_WARNING ("Failed to convert exif tag to ascii: 0x%x - %s. Error: %s",
-        tag, str, error->message);
-    g_error_free (error);
-    g_free (ascii_str);
+  /* UTF8 is endianness independent */
+  if (g_utf8_validate (str, -1, &str_end))
+    str_size = str_end - str + 1;
+  else {
+    GST_WARNING ("Tag 0x%x is not in a valid UTF8-encoding", tag);
     return;
   }
 
-  /* add the \0 at the end */
-  ascii_size++;
-
-  if (ascii_size > 4) {
+  if (str_size > 4) {
     /* we only use the data offset here, later we add up the
      * resulting tag headers offset and the base offset */
     offset = gst_byte_writer_get_size (&writer->datawriter);
     gst_exif_writer_write_tag_header (writer, tag, EXIF_TYPE_ASCII,
-        ascii_size, offset, NULL);
-    gst_byte_writer_put_string (&writer->datawriter, ascii_str);
+        str_size, offset, NULL);
+    gst_byte_writer_put_string (&writer->datawriter, str);
   } else {
     /* small enough to go in the offset */
-    memcpy ((guint8 *) & offset, ascii_str, ascii_size);
+    memcpy ((guint8 *) & offset, str, str_size);
     gst_exif_writer_write_tag_header (writer, tag, EXIF_TYPE_ASCII,
-        ascii_size, offset, &offset);
+        str_size, offset, &offset);
   }
-
-  g_free (ascii_str);
 }
 
 static void
