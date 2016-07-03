@@ -143,18 +143,30 @@ G_BEGIN_DECLS
  * For example, if this tag value is 2, the focal ratio is f/2.
  */
 #define GST_TAG_CAPTURING_FOCAL_RATIO          "capturing-focal-ratio"
+
 /**
  * GST_TAG_CAPTURING_FOCAL_LENGTH:
  *
  * Focal length used when capturing an image, in mm. (double)
  */
 #define GST_TAG_CAPTURING_FOCAL_LENGTH         "capturing-focal-length"
+
+/**
+ * GST_TAG_CAPTURING_FOCAL_LENGTH_35_MM:
+ *
+ * 35 mm equivalent focal length used when capturing an image, in mm. (double)
+ *
+ * Since: 1.10
+ */
+#define GST_TAG_CAPTURING_FOCAL_LENGTH_35_MM   "capturing-focal-length-35mm"
+
 /**
  * GST_TAG_CAPTURING_DIGITAL_ZOOM_RATIO:
  *
  * Digital zoom ratio used when capturing an image. (double)
  */
 #define GST_TAG_CAPTURING_DIGITAL_ZOOM_RATIO   "capturing-digital-zoom-ratio"
+
 /**
  * GST_TAG_CAPTURING_ISO_SPEED:
  *
